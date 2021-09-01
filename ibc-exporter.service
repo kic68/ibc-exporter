@@ -1,0 +1,15 @@
+[Unit]
+Description=Prometheus IBC Exporter
+After=network.target
+AssertPathExists=/home/kic/go/bin
+
+[Service]
+Type=notify
+ExecStartPre=+-/usr/sbin/usbip attach -r solar-pi.iantor.de -b 1-1.2
+ExecStart=/home/kic/go/bin/ibc-exporter
+User=kic
+WatchdogSec=60s
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
