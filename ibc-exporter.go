@@ -548,7 +548,7 @@ func publishMqtt(trimmedSerialNumber string, scope string, metric string, value 
 	if config["mqtt"] == "ok" {
 
 		mqtt.ERROR = log.New(os.Stdout, "", 0)
-		opts := mqtt.NewClientOptions().AddBroker(config["nmqttAddress"]).SetClientID(config["clientName"])
+		opts := mqtt.NewClientOptions().AddBroker(config["mqttAddress"]).SetClientID(config["clientName"])
 		opts.SetUsername(config["userName"])
 		opts.SetPassword(config["password"])
 		opts.SetKeepAlive(2 * time.Second)
@@ -646,6 +646,6 @@ func main() {
 		defer res.Body.Close()
 
 		logger.Infof("Sleeping...")
-		time.Sleep(time.Second * 10)
+		time.Sleep(time.Second * 60)
 	}
 }
